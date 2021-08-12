@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -33,11 +33,10 @@ public class AvengersService {
     }
 
     //PUT Method
-    @Transactional
-    public ResponseEntity<Avenger> updateAvenger(Avenger avenger, Long id) throws IllegalStateException{
-        Optional<Avenger> avengerUp = avengersRepository.findById(id);
-        if (avengerUp.isPresent()){
-            avengersRepository.save(avengerUp.get());
+    public ResponseEntity<Avenger> updateAvenger(Avenger avenger, Long id) {
+        Optional<Avenger> avengerOptional = avengersRepository.findById(id);
+        if (avengerOptional.isPresent()) {
+            avengersRepository.save(avenger);
             return ResponseEntity.ok(avenger);
         }
         return ResponseEntity.notFound().build();
@@ -48,5 +47,9 @@ public class AvengersService {
     public ResponseEntity<Avenger> deleteAvengerById(Long id) {
         avengersRepository.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    public Avenger verifyIfExists(long id){
+        return  avengersRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 }

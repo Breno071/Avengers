@@ -4,6 +4,7 @@ import com.example.demo.model.Avenger;
 import com.example.demo.service.AvengersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class Controller {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Avenger> putAvenger(@PathVariable(name = "id") Long id, @RequestBody Avenger avenger){
+    public ResponseEntity<Avenger> putAvenger(@PathVariable(name = "id") Long id, @Validated @RequestBody Avenger avenger){
         return avengersService.updateAvenger(avenger, id);
     }
 
