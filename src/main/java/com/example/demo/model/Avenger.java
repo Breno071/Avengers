@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import javax.annotation.processing.Generated;
 import javax.persistence.*;
 
 @Entity
