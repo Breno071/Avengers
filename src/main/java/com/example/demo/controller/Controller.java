@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 
 @RestController
-@RequestMapping("/avengers")
+@RequestMapping
 public class Controller {
 
     @Autowired
