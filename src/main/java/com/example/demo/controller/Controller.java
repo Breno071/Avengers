@@ -12,13 +12,13 @@ import java.util.NoSuchElementException;
 
 
 @RestController
-@RequestMapping("avengers/")
+@RequestMapping("api")
 public class Controller {
 
     @Autowired
     AvengersService avengersService;
 
-    @GetMapping
+    @GetMapping("/avengers")
     public List<Avenger> getAllAvengers() {
         return avengersService.getAll();
     }
