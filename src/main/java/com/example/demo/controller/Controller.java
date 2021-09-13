@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 
 @RestController
@@ -24,8 +25,8 @@ public class Controller {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Avenger> getbyID(@PathVariable(value = "id") Long id) throws NoSuchElementException {
-        return ResponseEntity.ok(avengersService.getAvengerById(id).orElseThrow(() -> new NoSuchElementException("Vingador não encontrado")));
+    public Optional<Avenger> getbyID(@PathVariable(value = "id") Long id) throws NoSuchElementException {
+        return avengersService.getAvengerById(id);
     }
 
     @PostMapping
